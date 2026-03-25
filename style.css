@@ -1,0 +1,504 @@
+/* ==========================================================================
+   Saint Price - Design System (UI/UX Pro Max)
+   ========================================================================== */
+
+   :root {
+    /* Color Palette - Luxury Gold (Dark Mode) */
+    --bg-base: #0A0A0E; /* Deep Luxury Black */
+    --bg-elevated: rgba(20, 20, 25, 0.7); /* Darker Glass */
+    --bg-glass-border: rgba(212, 175, 55, 0.35); /* Golden Glass Border */
+    
+    --brand-primary: #D4AF37; /* Solid Luxury Gold */
+    --brand-secondary: #FDE68A; /* Light Gold Accent */
+    --brand-gradient: linear-gradient(135deg, #FDE68A 0%, #D4AF37 50%, #B45309 100%);
+    
+    --status-income: #10B981; /* Emerald */
+    --status-income-bg: rgba(16, 185, 129, 0.15);
+    
+    --status-expense: #D4AF37; /* Gold changed accent */
+    --status-expense-bg: rgba(212, 175, 55, 0.15);
+    
+    /* Typography Colors */
+    --text-primary: #F8FAFC; /* Slate 50 */
+    --text-secondary: #94A3B8; /* Slate 400 */
+    --text-muted: #64748B; /* Slate 500 */
+    
+    /* Touch Target & Spacing */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+    
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    
+    /* Animation Timing */
+    --transition-fast: 150ms ease-in-out;
+    --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Base App Layout */
+.app-container {
+    max-width: 480px; /* Mobile first, app-like feel */
+    margin: 0 auto;
+    padding: var(--space-6);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #F8FAFC 0%, #94A3B8 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.04em; }
+h3 { font-size: 18px; font-weight: 600; }
+p { font-size: 16px; color: var(--text-secondary); }
+
+/* ==========================================================================
+   Components: Glass Card (Premium Feel)
+   ========================================================================== */
+.glass-card {
+    background: var(--bg-elevated);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--bg-glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.08);
+    padding: var(--space-6);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle gradient glow behind the balance card */
+.balance-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15), transparent 60%);
+    z-index: -1;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Layout Structures
+   ========================================================================== */
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.brand-logo {
+    height: 80px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    transition: transform var(--transition-normal);
+}
+
+.brand-logo:hover {
+    transform: scale(1.05);
+}
+
+.avatar {
+    width: 44px; /* Minimum touch target size 44x44 (UX Pro Max Priority 2) */
+    height: 44px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--bg-glass-border);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.avatar:hover {
+    background: var(--bg-glass-border);
+}
+
+/* Balance Section */
+.balance-label {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.balance-amount {
+    text-align: center;
+    margin-bottom: var(--space-6);
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.balance-stats {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    align-items: center;
+}
+
+.stat {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    justify-content: center;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--bg-glass-border);
+    margin: 0 var(--space-2);
+}
+
+.stat-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.income .stat-icon-wrapper {
+    background: var(--status-income-bg);
+    color: var(--status-income);
+}
+
+.expense .stat-icon-wrapper {
+    background: var(--status-expense-bg);
+    color: var(--status-expense);
+}
+
+.stat-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Quick Actions Button Section */
+.quick-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+/* Button UI */
+.btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer; /* UX CRITICAL */
+    min-height: 44px; /* UX CRITICAL: touch target */
+    transition: all var(--transition-normal);
+}
+
+.btn:active {
+    transform: scale(0.97); /* Micro-interaction */
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--status-income-bg);
+    color: var(--status-income);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.btn-primary:hover { background: rgba(16, 185, 129, 0.25); }
+
+.btn-secondary {
+    background: var(--status-expense-bg);
+    color: var(--status-expense);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.btn-secondary:hover { background: rgba(212, 175, 55, 0.3); }
+
+.btn-submit {
+    background: var(--brand-primary);
+    color: white;
+    padding: var(--space-4);
+    font-size: 16px;
+    flex-direction: row;
+}
+
+.btn-submit:hover { background: var(--brand-secondary); }
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--brand-primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.w-100 { width: 100%; }
+
+/* Transaction List */
+.transactions-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transactions-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--bg-glass-border);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+}
+
+.transaction-item:hover {
+    background: rgba(255, 255, 255, 0.05); /* Hover indication */
+}
+
+.txn-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.txn-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.txn-icon.inc { background: var(--status-income-bg); color: var(--status-income); }
+.txn-icon.exp { background: var(--status-expense-bg); color: var(--status-expense); }
+
+.txn-info h4 { font-size: 16px; font-weight: 500; }
+.txn-info span { font-size: 12px; color: var(--text-secondary); }
+
+.txn-amount { font-weight: 600; font-size: 16px; letter-spacing: 0.5px; }
+.txn-amount.inc { color: var(--status-income); }
+.txn-amount.exp { color: var(--text-primary); } /* White for expense so it reads cleanly */
+
+.empty-state {
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+    background: var(--bg-elevated);
+    border: 1px dashed var(--bg-glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+}
+
+/* Analytics Chart */
+.analytics-section {
+    padding: var(--space-5);
+}
+
+.chart-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   Modals & Forms
+   ========================================================================== */
+.modal-backdrop {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 50; /* UX High Priority: z-index management */
+    display: flex;
+    align-items: flex-end; /* Mobile Bottom Sheet Style */
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 480px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transform: translateY(100%);
+    transition: transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-backdrop.active .modal-content {
+    transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+    .modal-backdrop { align-items: center; }
+    .modal-content { 
+        border-radius: var(--radius-lg); 
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    .modal-backdrop.active .modal-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-6);
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    min-width: 44px;
+    min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    border-radius: var(--radius-full);
+}
+
+.btn-icon:hover {
+    background: var(--bg-glass-border);
+    color: var(--text-primary);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+input, select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--bg-glass-border);
+    color: white;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    font-size: 16px; /* Accessibility: prevents iOS zooming */
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+input:focus, select:focus {
+    border-color: var(--brand-primary);
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.currency-icon {
+    position: absolute;
+    left: var(--space-4);
+    color: var(--text-secondary);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.amount-input {
+    padding-left: 48px;
+    font-size: 24px;
+    font-weight: 700;
+}

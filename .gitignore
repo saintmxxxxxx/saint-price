@@ -1,0 +1,21 @@
+# Entornos Virtuales
+.venv/
+env/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
+server.log
+
+# Base de datos
+*.db
+*.sqlite3

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saint Price | Finanzas Personales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <img src="saintfinanzas.png" alt="Saint Price" class="brand-logo">
+            </div>
+            <div class="user-profile">
+                <button class="avatar" id="logoutBtn" title="Cerrar sesión" style="border:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Balance Card -->
+            <section class="glass-card balance-card">
+                <p class="balance-label">Balance Total</p>
+                <h2 class="balance-amount" id="totalBalance">$0.00</h2>
+                
+                <div class="balance-stats">
+                    <div class="stat income">
+                        <div class="stat-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-label">Ingresos</span>
+                            <span class="stat-value" id="totalIncome">$0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-divider"></div>
+
+                    <div class="stat expense">
+                        <div class="stat-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-label">Gastos</span>
+                            <span class="stat-value" id="totalExpense">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <section class="quick-actions">
+                <button class="btn btn-primary" id="btnIncome">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                    Añadir Ingreso
+                </button>
+                <button class="btn btn-secondary" id="btnExpense">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+                    Añadir Gasto
+                </button>
+            </section>
+
+            <!-- Analytics Chart -->
+            <section class="glass-card analytics-section">
+                <div class="section-header" style="margin-bottom: 16px;">
+                    <h3 style="font-size: 16px;">Gastos por Categoría</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="expensesChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Transactions List -->
+            <section class="transactions-section">
+                <div class="section-header">
+                    <h3>Movimientos Recientes</h3>
+                    <button class="btn-text">Ver todos</button>
+                </div>
+                <div class="transactions-list" id="transactionsList">
+                    <!-- Las transacciones se renderizarán aquí -->
+                    <div class="empty-state">
+                        <p>No hay movimientos aún. Agrega un ingreso o gasto para empezar.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-backdrop" id="transactionModal">
+        <div class="glass-card modal-content" role="dialog" aria-modal="true">
+            <div class="modal-header">
+                <h3 id="modalTitle">Añadir</h3>
+                <button class="btn-icon close-modal" id="closeModal" aria-label="Cerrar modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+            <form id="transactionForm">
+                <input type="hidden" id="transactionType" value="">
+                
+                <div class="form-group">
+                    <label for="amount">Monto</label>
+                    <div class="input-with-icon">
+                        <span class="currency-icon">$</span>
+                        <input type="number" id="amount" step="0.01" min="0.01" required placeholder="0.00" class="amount-input">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <input type="text" id="description" required placeholder="Ej. Quincena, Supermercado, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <select id="category" required>
+                        <!-- Las opciones se llenan por JS dependiendo si es ingreso o gasto -->
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-submit w-100" id="submitTransaction">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

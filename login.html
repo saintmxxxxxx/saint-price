@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceder | Saint Price</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+    <div class="auth-wrapper">
+        <div class="glass-card auth-card">
+            
+            <div class="auth-header">
+                <img src="saintfinanzas.png" alt="Saint Price" class="brand-logo" style="margin: 0 auto 16px;">
+                <h1 style="text-align: center; margin-bottom: 8px;">Bienvenido de nuevo</h1>
+                <p style="text-align: center;">Accede a tu cuenta en Saint Price.</p>
+            </div>
+
+            <!-- Formularios (Login / Register) -->
+            <div class="auth-form-container">
+                
+                <form id="authForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" required placeholder="tu_usuario">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" required placeholder="••••••••">
+                    </div>
+
+                    <div id="authError" class="auth-error" style="display: none; color: #F43F5E; text-align: center; font-size: 14px; margin-bottom: 16px;">
+                        Usuario o contraseña incorrectos.
+                    </div>
+
+                    <button type="submit" class="btn btn-submit" id="btnSubmit">Iniciar Sesión</button>
+                    
+                    <div class="toggle-auth">
+                        <span id="toggleText">¿No tienes cuenta?</span>
+                        <button type="button" class="btn-text" id="toggleModeBtn">Regístrate</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Estilos exclusivos de Auth -->
+    <style>
+        .login-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: var(--space-6);
+        }
+        
+        .auth-wrapper {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-card {
+            padding: var(--space-8);
+        }
+
+        .auth-header {
+            margin-bottom: var(--space-8);
+        }
+
+        .toggle-auth {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            margin-top: var(--space-6);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+    </style>
+
+    <script src="login.js"></script>
+</body>
+</html>
