@@ -38,7 +38,7 @@ authForm.addEventListener('submit', async (e) => {
     try {
         if (isLogin) {
             // LOGIN - JSON body
-            const res = await fetch('http://localhost:8008/login', {
+            const res = await fetch('https://saint-price.onrender.com/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
@@ -52,7 +52,7 @@ authForm.addEventListener('submit', async (e) => {
             
         } else {
             // REGISTER
-            const res = await fetch('http://localhost:8008/register', {
+            const res = await fetch('https://saint-price.onrender.com/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })

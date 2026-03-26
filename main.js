@@ -49,7 +49,7 @@ async function fetchTransactions() {
     }
 
     try {
-        const res = await fetch('http://localhost:8008/api/transactions', {
+        const res = await fetch('https://saint-price.onrender.com/api/transactions', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -311,7 +311,7 @@ async function saveTransaction() {
     btnSubmit.textContent = 'Guardando...';
 
     try {
-        const res = await fetch('http://localhost:8008/api/transactions', {
+        const res = await fetch('https://saint-price.onrender.com/api/transactions', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
